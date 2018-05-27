@@ -28,8 +28,11 @@ const signInSuccess = function (data) {
   $('.public').addClass('hidden')
   $('.status').removeClass('hidden')
   $('.private').removeClass('hidden')
-
   store.user = data.user
+
+  if (store.user.email === 'admin@srubin.org') {
+    $('.show-on-admin-sign-in').removeClass('hidden')
+  }
 }
 const signInFailure = function () {
   $('.authmessage').text('Please try again!')
@@ -63,6 +66,9 @@ const signOutSuccess = function () {
   $('.public').removeClass('hidden')
   $('.status').removeClass('hidden')
   $('.private').addClass('hidden')
+  if (store.user.email === 'admin@srubin.org') {
+    $('.show-on-admin-sign-in').addClass('hidden')
+  }
   store.user = null
 }
 module.exports = {

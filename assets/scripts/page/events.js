@@ -53,6 +53,13 @@ const onDeletePage = (event) => {
     .catch(ui.getDeletePageFailure)
 }
 
+const onAdminGetAllPages = (event) => {
+  event.preventDefault()
+  api.getPages()
+    .then(ui.adminGetAllPagesSuccess)
+    .catch(ui.getMyPagesFailure)
+}
+
 const addHandlers = () => {
   $('#create-page').on('submit', onCreatePage)
   $('#getPages').on('click', onGetPages)
@@ -68,6 +75,7 @@ const addHandlers = () => {
   })
   $('.page-content').on('submit', '.update-page', onUpdatePages)
   $('.page-content').on('click', '.destroy-id', onDeletePage)
+  $('#adminGetAllPages').on('click', onAdminGetAllPages)
 }
 
 module.exports = {

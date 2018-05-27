@@ -76,6 +76,14 @@ const getDeletePageFailure = function () {
   $('.status').text('Failed to delete page. Something has gone wrong.')
 }
 
+const adminGetAllPagesSuccess = function (data) {
+  const getMyPagesHTML = showMyPagesTemplate({pages: data.pages})
+  $('.page-content').html(getMyPagesHTML)
+  if (data.pages.length === 0) {
+    $('.page-content').html('<h2>No pages were found</h2>')
+  }
+}
+
 module.exports = {
   createPageSuccess,
   createPageFailure,
@@ -88,5 +96,6 @@ module.exports = {
   getUpdatePageSuccess,
   getUpdatePageFailure,
   getDeletePageSuccess,
-  getDeletePageFailure
+  getDeletePageFailure,
+  adminGetAllPagesSuccess
 }

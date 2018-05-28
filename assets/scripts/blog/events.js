@@ -60,6 +60,13 @@ const onDeleteBlog = (event) => {
     .catch(ui.getDeleteBlogFailure)
 }
 
+const onAdminGetAllBlogs = (event) => {
+  event.preventDefault()
+  api.getBlogs()
+    .then(ui.adminGetAllBlogsSuccess)
+    .catch(ui.getMyBlogsFailure)
+}
+
 const addHandlers = () => {
   $('#create-blog').on('submit', onCreateBlog)
   $('#getBlogs').on('click', onGetBlogs)
@@ -76,6 +83,7 @@ const addHandlers = () => {
   })
   $('.blog-content').on('submit', '.update-blog', onUpdateBlogs)
   $('.blog-content').on('click', '.destroy-id', onDeleteBlog)
+  $('#adminGetAllBlogs').on('click', onAdminGetAllBlogs)
 }
 
 module.exports = {

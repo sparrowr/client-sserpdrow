@@ -76,6 +76,14 @@ const getDeleteBlogFailure = function () {
   $('.status').text('Failed to delete blog. Something has gone wrong.')
 }
 
+const adminGetAllBlogsSuccess = function (data) {
+  const getMyBlogsHTML = showMyBlogsTemplate({blogs: data.blogs})
+  $('.blog-content').html(getMyBlogsHTML)
+  if (data.blogs.length === 0) {
+    $('.blog-content').html('<h2>No pages were found</h2>')
+  }
+}
+
 module.exports = {
   createBlogSuccess,
   createBlogFailure,
@@ -88,5 +96,6 @@ module.exports = {
   getUpdateBlogSuccess,
   getUpdateBlogFailure,
   getDeleteBlogSuccess,
-  getDeleteBlogFailure
+  getDeleteBlogFailure,
+  adminGetAllBlogsSuccess
 }

@@ -1,5 +1,18 @@
 'use strict '
 const store = require('../store.js')
+
+const isAdmin = function () {
+  const adminEmails = ['admin@srubin.org']
+  let inAdminList = false
+  adminEmails.forEach(function (email) {
+    if (email === store.user.email) {
+      console.log('ui.js recognized admin login')
+      inAdminList = true
+    }
+  })
+  return inAdminList
+}
+
 const signUpSuccess = function () {
   $('.status').text('You have successfully signed up! Please sign in!')
   setTimeout(() => $('.status').text(''), 2000)
@@ -30,7 +43,8 @@ const signInSuccess = function (data) {
   $('.private').removeClass('hidden')
   store.user = data.user
 
-  if (store.user.email === 'admin@srubin.org') {
+  if (isAdmin()) {
+    console.log('signinSuccess recognized admin')
     $('.show-on-admin-sign-in').removeClass('hidden')
   }
 }
@@ -66,7 +80,7 @@ const signOutSuccess = function () {
   $('.public').removeClass('hidden')
   $('.status').removeClass('hidden')
   $('.private').addClass('hidden')
-  if (store.user.email === 'admin@srubin.org') {
+  if (isAdmin()) {
     $('.show-on-admin-sign-in').addClass('hidden')
   }
   store.user = null
